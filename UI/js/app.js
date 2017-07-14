@@ -19,10 +19,17 @@ angular.module('mgBlog', ['ngRoute'])
 		.factory('myInterceptor', ['$q', function($q){
 				return {
 					response: function(response) {
-						if(response.data.status === 'error') {
+						
+						// if response have code..means system error
+						if(response.data.code) {
 							alert(response.data.message);
 						}
 						return response || $q.when(response);
+					},
+					
+					responseError: function(rejection) {
+						alert(rejection.data.message);
+						return $q.reject(rejection);
 					}
 				}
 		}])

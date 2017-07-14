@@ -29,13 +29,13 @@ class Output {
 
 function show_404() {
 	header('HTTP/1.0 404 Not Found', true, 404);
-	echo _is_ajax_request() ? ajaxErrorResponse('404 Not Found') : _load_view('/erros/404.html');
+	echo _is_ajax_request() ? ajaxErrorResponse('404 Not Found', 404) : _load_view('/erros/404.html');
 	die();
 }
 
 function show_403() {
 	header('HTTP/1.0 403 Unauthorized', true, 403);
-	echo _is_ajax_request() ? ajaxErrorResponse('403 Unauthorized Access') : _load_view('/erros/403.html');
+	echo _is_ajax_request() ? ajaxErrorResponse('403 Unauthorized Access', 403) : _load_view('/erros/403.html');
 	die();
 }
 
@@ -53,11 +53,17 @@ function ajaxSuccessResponse($data = array(), $message = '') {
 }
 
 
-function ajaxErrorResponse($message) {
+function ajaxErrorResponse($message, $code = '') {
 	
-	return json_encode(array(
+	$response =  array(
 		'status' => 'error',
 		'message' => $message
-	));
+	);
+	
+	if (!empty($code)) {
+		$response['code'] = $code;
+	}
+	
+	return json_encode($response);
 	
 }

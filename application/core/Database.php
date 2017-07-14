@@ -14,7 +14,7 @@ class Database {
 				$this->_config->password, DATABASE_NAME, $this->_config->port);
 		
 		if ($this->_connection->connect_error) {
-			echo ajaxErrorResponse('Connect Error (' . $this->_connection->connect_errno . ') '. $this->_connection->connect_error);
+			echo ajaxErrorResponse('Connect Error (' . $this->_connection->connect_errno . ') '. $this->_connection->connect_error, "DB_ERROR");
 			die();
 		}
 	}
