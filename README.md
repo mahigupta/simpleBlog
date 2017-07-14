@@ -9,7 +9,7 @@ A simple blog application implemented using PHP, AngularJS,MYSQL and Bootstrap
  3) PHP 7.0 +
  
 # setup
-1)Place entire folder into /var/www directory of your server.
+1) Place entire folder into /var/www directory of your server.
 
 2) database schema is in application/database/schema.sql. Please import it into your mysql before running. It will create a database mg_blog and all tabels automatically.
 
