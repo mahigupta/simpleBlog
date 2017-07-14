@@ -17,6 +17,6 @@ A simple blog application implemented using PHP, AngularJS,MYSQL and Bootstrap
 
 4) .htaccess file included already for apache.
 
-5) just launch http://localhost in browser.
+5) just launch http://localhost (or whatever server address settings you have) in browser.
 
 
