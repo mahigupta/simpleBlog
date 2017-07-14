@@ -2,11 +2,11 @@
 A simple blog application implemented using PHP, AngularJS,MYSQL and Bootstrap
 
 # system requirements
- 1.) Apache
+ 1) Apache
  
- 2.) Mysql / mariadb  
+ 2) Mysql / mariadb  
  
- 3.) PHP 7.0 +
+ 3) PHP 7.0 +
  
 # setup
 1)Place entire folder into /var/www directory of your server.
