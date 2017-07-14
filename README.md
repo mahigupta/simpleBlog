@@ -1,7 +1,7 @@
 # simpleBlog
 A simple blog application implemented using PHP, AngularJS,MYSQL and Bootstrap
 
-#system requirements
+# system requirements
  1.) Apache
  2.) Mysql / mariadb  
  3.) PHP 7.0 +
