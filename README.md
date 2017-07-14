@@ -8,6 +8,13 @@ A simple blog application implemented using PHP, AngularJS,MYSQL and Bootstrap
  
  3) PHP 7.0 +
  
+ # libraries
+ 
+ 1) I took inspiration from codeigniter and implemented my own php framework for server side MVC.
+ 2) Angularjs 1.6.5
+ 3) Bootstrap for front end design
+ 4) Jquery 3.2.1 (only added because bootstrap.min.js need jquery)
+ 
 # setup
 1) Place entire folder into /var/www directory of your server.
 
