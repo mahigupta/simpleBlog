@@ -6,13 +6,15 @@ angular.module('mgBlog')
 		user: {},
 		passwordMinLength: 6,
 		passwordMaxLength: 14,
+		userNameMaxLength: 20,
 
 		notValid: function() {
 			
 			return !$scope.user.username || !$scope.user.password || !$scope.user.repassword || 
 					($scope.user.password !== $scope.user.repassword) ||
 					($scope.user.password.length < $scope.passwordMinLength) ||
-					($scope.user.password.length > $scope.passwordMaxLength);
+					($scope.user.password.length > $scope.passwordMaxLength) ||
+					($scope.user.username.length > $scope.userNameMaxLength);
 					
 		},
 		

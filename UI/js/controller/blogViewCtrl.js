@@ -11,6 +11,7 @@ angular.module('mgBlog')
 		alert: {},
 		
 		fetchBlog: function() {
+			
 			$http.post('/blog/view', {id: $routeParams.id}).then(function(response){
 				var data= response.data && response.data.data ? response.data.data[0] : {};
 				$scope.blog = data;
@@ -39,6 +40,7 @@ angular.module('mgBlog')
 			$http.post('/comments/post', {blog_id: $routeParams.id, comment: $scope.currentComment}).then(function(response){
 				
 				if (response.data.status === 'success') {
+					$scope.commentPage = 0;
 					$scope.fetchComment();
 				}
 				
@@ -51,7 +53,6 @@ angular.module('mgBlog')
 	
 	checkLoginProvider.checkLogin().then(function(response){
 		$scope.isLoggedIn = response.data.ok;
-		
 		$scope.fetchBlog();
 	});
 	
