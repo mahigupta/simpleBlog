@@ -1,4 +1,10 @@
-<form class="form-horizontal">
+<ol class="breadcrumb">
+  <li><a href="#!/">Home</a></li>
+  <li><a href="#!/blog/my">My Blogs</a></li>
+  <li class="active">{{blog.id ? 'Edit' : 'Create'}}</li>
+</ol>
+
+<form>
 	
 	<div class="alert alert-{{alert.status}}" role="alert" ng-if="alert.status">{{alert.message}}</div>
 	
@@ -9,9 +15,11 @@
 	 
 	<div class="form-group">
 		<label for="blogContent">Content</label>
-		<textarea class="form-control" id="blogContent" rows="20" ng-model="blog.content"></textarea>
+		<textarea class="form-control" id="blogContent" rows="20" ng-model="blog.content" maxlength="maxContentLength"></textarea>
 	 </div>	
-
+	
+	<small class="pull-left">{{blog.content.length | number}} / {{maxContentLength | number}} characters</small>
+		
 	<button class="btn btn-primary pull-right" ng-click="publishBlog()" ng-disabled="!blog.content || !blog.title">Publish</button>
 	
 	<div class="clearfix"></div>

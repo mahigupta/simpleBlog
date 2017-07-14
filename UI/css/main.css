@@ -16,6 +16,10 @@ and open the template in the editor.
 	margin: 10px;
 }
 
+.post-comment-form > .comment-widget {
+	margin: 10px;
+}
+
 .panel-body {
 	line-height: 30px;
 }

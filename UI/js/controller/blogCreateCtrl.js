@@ -5,7 +5,10 @@ angular.module('mgBlog')
 		
 	angular.extend($scope, {
 		
+		maxContentLength: 30000,
+		
 		publishBlog: function() {
+			
 			$scope.alert = {};
 			
 			$http.post('/blog/post', $scope.blog).then(function(response){

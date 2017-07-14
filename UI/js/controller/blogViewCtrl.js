@@ -8,6 +8,8 @@ angular.module('mgBlog')
 		commentPage: 0,
 		commentLimit: 5,
 		currentComment: '',
+		commentMaxLength: 1000,
+		
 		alert: {},
 		
 		fetchBlog: function() {

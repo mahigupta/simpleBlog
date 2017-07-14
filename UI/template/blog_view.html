@@ -30,9 +30,16 @@
 		{{alert.message}}
 	</div>
 	
-	<textarea class="form-control" rows="3" ng-model="currentComment"></textarea>
-	<button class="btn btn-primary pull-right" ng-click="postComment()" ng-disabled="!currentComment">Post</button>
-	<div class="clearfix"></div>
+	<textarea class="form-control" rows="3" ng-model="currentComment" maxlength="{{commentMaxLength}}"></textarea>
+	
+	<div class="comment-widget">
+		<small class="pull-left">{{currentComment.length | number}} / {{commentMaxLength | number}} characters</small>
+		<button class="btn btn-primary pull-right" ng-click="postComment()" ng-disabled="!currentComment">Post</button>
+		<div class="clearfix"></div>
+	</div>
+	
+	
+	
 </form>
 
 <ul class="list-group">
