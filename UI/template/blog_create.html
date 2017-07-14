@@ -1,0 +1,19 @@
+<form class="form-horizontal">
+	
+	<div class="alert alert-{{alert.status}}" role="alert" ng-if="alert.status">{{alert.message}}</div>
+	
+	<div class="form-group">
+		<label for="blogTitle">Title</label>
+		<input class="form-control" id="blogTitle" placeholder="Title" ng-model="blog.title">
+	 </div>
+	 
+	<div class="form-group">
+		<label for="blogContent">Content</label>
+		<textarea class="form-control" id="blogContent" rows="20" ng-model="blog.content"></textarea>
+	 </div>	
+
+	<button class="btn btn-primary pull-right" ng-click="publishBlog()" ng-disabled="!blog.content || !blog.title">Publish</button>
+	
+	<div class="clearfix"></div>
+
+</form>
