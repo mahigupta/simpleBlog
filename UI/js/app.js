@@ -16,7 +16,7 @@ angular.module('mgBlog', ['ngRoute'])
 					}
 				};
 		}])
-		.factory('myInterceptor', ['$q', '$location', function($q, $location){
+		.factory('myInterceptor', ['$q', function($q){
 				return {
 					response: function(response) {
 						
@@ -32,8 +32,7 @@ angular.module('mgBlog', ['ngRoute'])
 						alert(rejection.data.message);
 									
 						if (rejection.status !== 200) {
-							$location.path('/');
-							$location.replace();
+							window.location = '/';
 						}
 						
 						return $q.reject(rejection);
