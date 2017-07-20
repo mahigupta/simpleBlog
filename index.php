@@ -46,4 +46,3 @@ if (!_currently_logged_in() && $ROUTE->is_log_in_require()) {
 
 // execute class method
 $class->$method();
-
