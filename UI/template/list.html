@@ -12,10 +12,10 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		
+
 		<h2><a href="#!/blog/view/{{blog.id}}">{{blog.title}}</a></h2>
 
-		<h6 class="text-muted pull-left"> by {{blog.username}}</h6>
+		<h6 class="text-muted pull-left"> Author: {{blog.username}}</h6>
 		<h6 class="text-muted pull-right"> Last edited:  {{blog.last_modified * 1000 | date: 'medium'}}</h6>
 		<div class="clearfix"></div>
 		<p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}">More</a></p>
@@ -34,7 +34,7 @@
 </nav>
 
 <div class="well" ng-if="blogList.length === 0">
-	<p>No Blog post yet !!!!</p> 
+	<p>No Blog post yet !!!!</p>
 	<p ng-if="!isLoggedIn">
 		<a href="#!/login">Login</a> or <a href="#!/register">Register</a> now and start blogging.
 	</p>
