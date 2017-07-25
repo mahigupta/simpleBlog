@@ -9,20 +9,20 @@
 	<link href="/UI/css/main.css" rel="stylesheet">
 
   </head>
-  
+
   <body ng-app="mgBlog" ng-cloak>
-	  
+
 	  <nav class="navbar navbar-default" ng-controller="mainCtrl">
-		  
+
 		  <div class="container-fluid">
 			  <div class="navbar-header">
-				  <a class="navbar-brand" href="/"><img alt="Brand" src="/favicon.ico" height="30" width="30"></a>
+				  <a class="navbar-brand" href="/">A Simple Blog</a>
 			  </div>
-			  
+
 			  <ul class="nav navbar-nav navbar-right">
-				  
+
 				<li ng-if="isLoggedIn"><a href="#!/blog/create">Create Blog</a></li>
-				
+
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						{{username ? username : 'Account'}}
@@ -45,14 +45,14 @@
 			  </ul>
 		  </div>
 	  </nav>
-	  
+
 	  <div ng-view class="main-view"></div>
 
     <script src="/UI/js/libraries/jquery/jquery.min.js"></script>
     <script src="/UI/js/libraries/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/UI/js/libraries/angular/angular.min.js"></script>
 	<script src="/UI/js/libraries/angular/angular.route.min.js"></script>
-	
+
 	<script src="/UI/js/app.js"></script>
 	<script src="/UI/js/controller/mainCtrl.js"></script>
 	<script src="/UI/js/controller/blogListCtrl.js"></script>
@@ -61,5 +61,5 @@
 	<script src="/UI/js/controller/blogCreateCtrl.js"></script>
 	<script src="/UI/js/controller/blogViewCtrl.js"></script>
   </body>
-  
+
 </html>
