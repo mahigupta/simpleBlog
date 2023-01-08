@@ -1,75 +1,76 @@
 <?php
 
-class blog_model extends base_model {
+class blog_model extends base_model
+{
 
-	public function fetchBlogList($page = 0, $limit = 10, $user = '') {
+    public function fetchBlogList($page = 0, $limit = 10, $user = '')
+    {
 
-		$sql = "Select blog.id, users.username, blog.title, SUBSTRING(blog.content, 1, 200) as content, "
-				. "unix_timestamp(blog.last_modified) AS `last_modified` from blog left join users on (blog.userid = users.id)";
+        $sql = "Select blog.id, users.username, blog.title, SUBSTRING(blog.content, 1, 200) as content, "
+            . "unix_timestamp(blog.last_modified) AS `last_modified` from blog left join users on (blog.userid = users.id)";
 
+        if (!empty($user)) {
+            $sql .= " Where blog.userid = $user";
+        }
 
-		if (!empty($user)) {
-			$sql .= " Where blog.userid = $user";
-		}
+        $sql .= " order by blog.last_modified desc limit $page, $limit";
+        $rows = $this->database->query($sql);
 
-		$sql .= " order by blog.last_modified desc limit $page, $limit";
-		$rows = $this->database->query($sql);
+        $results = array();
 
-		$results = array();
+        if ($rows && $rows->num_rows > 0) {
+            while ($row = $rows->fetch_array(MYSQLI_ASSOC)) {
+                $results[] = $row;
+            }
+        }
 
-		if ($rows && $rows->num_rows > 0) {
-			while($row = $rows->fetch_array(MYSQLI_ASSOC)) {
-				$results[] = $row;
-			}
-		}
+        return $results;
+    }
 
+    public function fetchBlog($id)
+    {
 
-		return $results;
-	}
+        $sql = "Select blog.id, users.username, blog.title, blog.content, "
+            . "unix_timestamp(blog.last_modified) AS `last_modified` from blog left join users on (blog.userid = users.id) where blog.id = ?";
 
+        $rows = $this->database->query($sql, array($id));
 
-	public function fetchBlog($id) {
+        $results = array();
 
-		$sql = "Select blog.id, users.username, blog.title, blog.content, "
-				. "unix_timestamp(blog.last_modified) AS `last_modified` from blog left join users on (blog.userid = users.id) where blog.id = ?";
+        if ($rows && $rows->num_rows > 0) {
+            while ($row = $rows->fetch_array(MYSQLI_ASSOC)) {
+                $results[] = $row;
+            }
+        }
 
-		$rows = $this->database->query($sql, array($id));
+        return $results;
+    }
 
-		$results = array();
+    public function post($title, $content, $id = '')
+    {
+        $user = $this->currentUser();
+        $params = array($title, $content);
 
-		if ($rows && $rows->num_rows > 0) {
-			while($row = $rows->fetch_array(MYSQLI_ASSOC)) {
-				$results[] = $row;
-			}
-		}
+        if (empty($id)) {
+            $sql = "Insert into blog (title, content, userid) values (?, ?, ?)";
+            array_push($params, $user['id']);
+        } else {
+            $sql = "update blog set title = ?, content = ? where id = ? and blog.userid = ?";
+            array_push($params, $id, $user['id']);
+        }
 
-		return $results;
-	}
+        $return = $this->database->query($sql, $params);
 
-	public function post($title, $content, $id = '') {
+        return $return && empty($id) ? $this->database->insert_id() : $id;
+    }
 
-		$params = array($title, $content);
+    public function delete($id)
+    {
+        $sql = "Delete from blog where id = ? and blog.userid = ?";
+        $user = $this->currentUser();
 
-		if (empty($id)) {
-			$sql = "Insert into blog (title, content, userid) values (?, ?, ?)";
-			$user = $this->currentUser();
-			array_push($params, $user['id']);
-		} else {
-			$sql = "update blog set title = ?, content = ? where id = ?";
-			array_push($params, $id);
-		}
+        $return = $this->database->query($sql, array($id, $user['id']));
 
-
-		$return = $this->database->query($sql, $params);
-
-		return $return && empty($id) ? $this->database->insert_id() : $id;
-	}
-
-	public function delete($id) {
-		$sql = "Delete from blog where id = ?";
-
-		$return = $this->database->query($sql, array($id));
-
-		return $return ? ajaxSuccessResponse(array(), "Deleted successfully") : $return;
-	}
+        return $return ? ajaxSuccessResponse(array(), "Deleted successfully") : $return;
+    }
 }

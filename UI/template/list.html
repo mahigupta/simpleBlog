@@ -1,44 +1,44 @@
 <ol class="breadcrumb" ng-if="my">
-  <li><a href="#!/">Home</a></li>
-  <li class="active">My Blogs</li>
+    <li><a href="#!/">Home</a></li>
+    <li class="active">My Blogs</li>
 </ol>
 
 <ul class="list-group">
-	<li class="list-group-item" ng-repeat="blog in blogList">
-		<div ng-if="my">
-			<div class="pull-right">
-				<a href="#!/blog/edit/{{blog.id}}" class="glyphicon glyphicon-pencil">&nbsp;</a>
-				<a class="glyphicon glyphicon-remove" ng-click="deleteBlog(blog)"></a>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+    <li class="list-group-item" ng-repeat="blog in blogList">
+        <div ng-if="my">
+            <div class="pull-right">
+                <a href="#!/blog/edit/{{blog.id}}" class="glyphicon glyphicon-pencil">&nbsp;</a>
+                <a class="glyphicon glyphicon-remove" ng-click="deleteBlog(blog)"></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
 
-		<h2><a href="#!/blog/view/{{blog.id}}">{{blog.title}}</a></h2>
+        <h2><a href="#!/blog/view/{{blog.id}}">{{blog.title}}</a></h2>
 
-		<h6 class="text-muted pull-left"> Author: {{blog.username}}</h6>
-		<h6 class="text-muted pull-right"> Last edited:  {{blog.last_modified * 1000 | date: 'medium'}}</h6>
-		<div class="clearfix"></div>
-		<p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}">More</a></p>
-	</li>
+        <h6 class="text-muted pull-left"> Author: {{blog.username}}</h6>
+        <h6 class="text-muted pull-right"> Last edited: {{blog.last_modified * 1000 | date: 'medium'}}</h6>
+        <div class="clearfix"></div>
+        <p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}">More</a></p>
+    </li>
 </ul>
 
 <nav aria-label="...">
-  <ul class="pager">
-    <li class="previous" ng-show="page > 0">
-		<a ng-click="page = page - 1; fetchListing();"><span aria-hidden="true">&larr;</span> Newer</a>
-	</li>
-    <li class="next" ng-show="blogList.length === limit">
-		<a ng-click="page = page + 1; fetchListing();">Older <span aria-hidden="true">&rarr;</span></a>
-	</li>
-  </ul>
+    <ul class="pager">
+        <li class="previous" ng-show="page > 0">
+            <a ng-click="page = page - 1; fetchListing();"><span aria-hidden="true">&larr;</span> Newer</a>
+        </li>
+        <li class="next" ng-show="blogList.length === limit">
+            <a ng-click="page = page + 1; fetchListing();">Older <span aria-hidden="true">&rarr;</span></a>
+        </li>
+    </ul>
 </nav>
 
 <div class="well" ng-if="blogList.length === 0">
-	<p>No Blog post yet !!!!</p>
-	<p ng-if="!isLoggedIn">
-		<a href="#!/login">Login</a> or <a href="#!/register">Register</a> now and start blogging.
-	</p>
-	<p ng-if="isLoggedIn">
-		<a href="#!/blog/create">Create</a> new one.
-	</p>
+    <p>No Blog post yet !!!!</p>
+    <p ng-if="!isLoggedIn">
+        <a href="#!/login">Login</a> or <a href="#!/register">Register</a> now and start blogging.
+    </p>
+    <p ng-if="isLoggedIn">
+        <a href="#!/blog/create">Create</a> new one.
+    </p>
 </div>
