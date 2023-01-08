@@ -13,9 +13,9 @@ class register extends Base {
 		$this->output->setContentType('application/json');
 		$username = $this->input->getPost('username');
 		$password = $this->input->getPost('password');
-		
-		$result = $this->user_model->register($username, $password);
+		$email = $this->input->getPost('email');
+
+		$result = $this->user_model->register($username, $password, $email);
 		$this->output->setOutput($result);
 	}
 }
-

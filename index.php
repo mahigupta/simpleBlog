@@ -1,6 +1,3 @@
-
-
-
 <?php
 
 // define application folder
@@ -8,7 +5,6 @@ define('APPLICATION_PATH', __DIR__."/application");
 
 // autoload all required files using autoloader
 include_once APPLICATION_PATH.'/autoloader.php';
-
 
 // initiate route
 $ROUTE = _process_route();

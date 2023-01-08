@@ -28,21 +28,29 @@ class user_model extends base_model {
 	}
 	
 	
-	public function register($username, $password) {
+	public function register($username, $password, $email) {
 		
-		$sql = "Select * from users where username = ?";
+		if (empty($username) || empty($password) || empty($email)) {
+			return ajaxErrorResponse("Require param missing");
+		}
+
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			return ajaxErrorResponse("Invalid email");
+		}
 		
-		$rows = $this->database->query($sql, array($username));
+		$sql = "Select * from users where (username = ? or email = ?";
+		
+		$rows = $this->database->query($sql, array($username, $email));
 		
 		if ($rows->num_rows > 0) {
-			return ajaxErrorResponse("username already exists");
+			return ajaxErrorResponse("username/email already exists");
 		}
 		
 		$hash_pwd = password_hash($password, PASSWORD_BCRYPT);
 		
-		$sql = "Insert into users (username, password) values (?, '$hash_pwd')";
+		$sql = "Insert into users (username, password, email) values (?, '$hash_pwd', ?)";
 		
-		$response = $this->database->query($sql, array($username));
+		$response = $this->database->query($sql, array($username, $email));
 		
 		if ($response) {
 			$this->session->createLoginCookie($username);
@@ -52,4 +60,3 @@ class user_model extends base_model {
 		return ajaxErrorResponse("Unable to register");
 	}
 }
-

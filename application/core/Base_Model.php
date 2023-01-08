@@ -23,9 +23,7 @@ class base_model {
 				$result = $row;
 			}
 		}
-		
 
 		return $result;
 	}
 }
-

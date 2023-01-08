@@ -1,20 +1,19 @@
-/* 
- * schema for blog's mysql database
+/*
+ *   Copyright (c) 2023 Mahesh Gupta
+ *   All rights reserved.
  */
-/**
- * Author:  maheshgupta
- * Created: Jul 11, 2017
- */
+-- schema for blog's mysql database
 
-drop database if exists `mg_blog`;
+drop database if exists `simple_blog`;
 
-create database `mg_blog` character set UTF8 collate utf8_bin; 
+create database `simple_blog` character set UTF8 collate utf8_bin; 
 
-use `mg_blog`;
+use `simple_blog`;
 
 create table `users` (
 	id int(32) not null AUTO_INCREMENT primary key,
 	username varchar(64) not null unique key,
+	email varchar(255) not null unique key,
 	password varchar(64) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
