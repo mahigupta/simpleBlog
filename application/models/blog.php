@@ -6,7 +6,7 @@ class blog_model extends base_model
     public function fetchBlogList($page = 0, $limit = 10, $user = '')
     {
 
-        $sql = "Select blog.id, users.username, blog.title, SUBSTRING(blog.content, 1, 200) as content, REPLACE(blog.title, ' ', '-') as `slug`, "
+        $sql = "Select blog.id, users.username, blog.title, SUBSTRING(blog.content, 1, 200) as content, blog.slug, "
             . "unix_timestamp(blog.last_modified) AS `last_modified` from blog left join users on (blog.userid = users.id)";
 
         if (!empty($user)) {
