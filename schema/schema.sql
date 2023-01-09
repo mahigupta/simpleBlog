@@ -39,3 +39,12 @@ create table comments (
 	FOREIGN KEY (userid) references users(id),
 	FOREIGN KEY (blogid) references blog(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table active_session (
+	id int(64) not null AUTO_INCREMENT primary key,
+	userid int(32) not null,
+	`session_id` varchar(256) not null unique key,
+	expired_at timestamp NOT NULL,
+	FOREIGN KEY (userid) references users(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

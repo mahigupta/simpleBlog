@@ -17,7 +17,7 @@ class login extends Base {
 		$response = array('ok' => _currently_logged_in());
 		
 		if ($response['ok']) {
-			$response['user'] = $this->session->getCookie(SESSION_USERNAME_COOKIE);
+			$response['user'] = $this->session->current_user_record()["username"];
 		}
 		
 		$this->output->setOutput(json_encode($response));

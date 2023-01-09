@@ -20,7 +20,7 @@ class user_model extends base_model {
 		}
 		
 		if (password_verify($password, $result['password'])) {
-			$this->session->createLoginCookie($username);
+			$this->session->createLoginCookie($result['id']);
 			return ajaxSuccessResponse(array($username), "Successfully logged in");
 		}
 		
@@ -53,7 +53,7 @@ class user_model extends base_model {
 		$response = $this->database->query($sql, array($username, $email));
 		
 		if ($response) {
-			$this->session->createLoginCookie($username);
+			$this->session->createLoginCookie($this->database->insert_id());
 			return ajaxSuccessResponse(array($username), "Successfully registered");
 		}
 		

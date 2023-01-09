@@ -99,9 +99,9 @@ function _is_ajax_request() {
 // check if user session cookie set or not
 function _currently_logged_in() {
 
-	if (isset($_COOKIE[SESSION_USERNAME_COOKIE])) {
+	if (isset($_COOKIE[SESSION_COOKIE])) {
 		$database = new Database();
-		$rows = $database->query("Select id from users where username = ? ", array($_COOKIE[SESSION_USERNAME_COOKIE]));
+		$rows = $database->query("Select id from active_session where session_id = ? ", array($_COOKIE[SESSION_COOKIE]));
 		return $rows->num_rows > 0;
 	}
 

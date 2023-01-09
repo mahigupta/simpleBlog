@@ -14,16 +14,6 @@ class base_model {
 			show_403();
 		}
 		
-		$rows = $this->database->query("Select * from users where username = ? ", array($this->session->getCookie(SESSION_USERNAME_COOKIE)));
-		
-		$result = array();
-		
-		if ($rows && $rows->num_rows > 0) {
-			while($row = $rows->fetch_array(MYSQLI_ASSOC)) {
-				$result = $row;
-			}
-		}
-
-		return $result;
+		return $this->session->current_user_record();
 	}
 }
