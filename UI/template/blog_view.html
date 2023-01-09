@@ -1,67 +1,73 @@
-
 <ol class="breadcrumb">
-  <li><a href="#!/">Home</a></li>
-  <li ng-if="isLoggedIn"><a href="#!/blog/my">My Blogs</a></li>
-  <li class="active">{{blog.title}}</li>
+    <li><a href="#!/">Home</a></li>
+    <li ng-if="isLoggedIn && username == blog.username"><a href="#!/blog/my">My Blogs</a></li>
+    <li class="active">{{blog.title}}</li>
 </ol>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3>{{blog.title}}</h3>
-	<h5 class="text-muted pull-left"> Author: {{blog.username}}</h5>
-	<h5 class="text-muted pull-right"> Last edited:  {{blog.last_modified * 1000 | date: 'medium'}}</h5>
-	<div class="clearfix"></div>
-  </div>
-	
-  <div class="panel-body view-blog-content">
-    {{blog.content}}
-  </div>
-	
+    <div class="panel-heading">
+        <h3>{{blog.title}}</h3>
+
+        <div ng-if="username == blog.username">
+            <div class="pull-right">
+                <a href="#!/blog/edit/{{blog.id}}/{{blog.slug}}" class="glyphicon glyphicon-pencil">&nbsp;</a>
+                <a class="glyphicon glyphicon-remove" ng-click="deleteBlog(blog)"></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <h5 class="text-muted pull-left"> Author: {{blog.username}}</h5>
+        <h5 class="text-muted pull-right"> Last edited: {{blog.last_modified * 1000 | date: 'medium'}}</h5>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="panel-body view-blog-content">
+        {{blog.content}}
+    </div>
+
 </div>
 
 <div class="page-header">
-  <h3>Comments</h3>
+    <h3>Comments</h3>
 </div>
 
 <form ng-hide="!isLoggedIn" class="post-comment-form">
-	
-	<div class="alert alert-{{alert.status}} alert-dismissable" role="alert" ng-if="alert.status">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		{{alert.message}}
-	</div>
-	
-	<textarea class="form-control" rows="3" ng-model="currentComment" maxlength="{{commentMaxLength}}"></textarea>
-	
-	<div class="comment-widget">
-		<small class="pull-left">{{currentComment.length | number}} / {{commentMaxLength | number}} characters</small>
-		<button class="btn btn-primary pull-right" ng-click="postComment()" ng-disabled="!currentComment">Post</button>
-		<div class="clearfix"></div>
-	</div>
-	
-	
-	
+
+    <div class="alert alert-{{alert.status}} alert-dismissable" role="alert" ng-if="alert.status">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{alert.message}}
+    </div>
+
+    <textarea class="form-control" rows="3" ng-model="currentComment" maxlength="{{commentMaxLength}}"></textarea>
+
+    <div class="comment-widget">
+        <small class="pull-left">{{currentComment.length | number}} / {{commentMaxLength | number}} characters</small>
+        <button class="btn btn-primary pull-right" ng-click="postComment()" ng-disabled="!currentComment">Post</button>
+        <div class="clearfix"></div>
+    </div>
+
+
+
 </form>
 
 <ul class="list-group">
-	<li class="list-group-item" ng-repeat="comment in commentList">
-		<p>{{comment.comment}}</p>
-		<small class="text-muted pull-left"> by {{comment.username}}</small>
-		<small class="text-muted pull-right"> Date:  {{comment.last_modified * 1000 | date: 'medium'}}</small>
-		<div class="clearfix"></div>
-	</li>
-	
-	<li class="list-group-item" ng-if="commentList.length === 0">
-		<p>No comments on this post !!!!  <span ng-if="!isLoggedIn"><a href="#!/login">Login</a> to comments on this post.</span></p>
-	</li>
+    <li class="list-group-item" ng-repeat="comment in commentList">
+        <p>{{comment.comment}}</p>
+        <small class="text-muted pull-left"> by {{comment.username}} <span ng-if="comment.username ==  blog.username">(Author)</span></small>
+        <small class="text-muted pull-right"> Date:  {{comment.last_modified * 1000 | date: 'medium'}}</small>
+        <div class="clearfix"></div>
+    </li>
+
+    <li class="list-group-item" ng-if="commentList.length === 0">
+        <p>No comments on this post !!!! <span ng-if="!isLoggedIn"><a href="#!/login">Login</a> to comments on this post.</span></p>
+    </li>
 </ul>
 <nav aria-label="...">
-  <ul class="pager">
-    <li class="previous" ng-show="commentPage > 0">
-		<a ng-click="commentPage = commentPage - 1; fetchComment();"><span aria-hidden="true">&larr;</span> Newer</a>
-	</li>
-    <li class="next" ng-show="commentList.length === commentLimit">
-		<a ng-click="commentPage = commentPage + 1; fetchComment();">Older <span aria-hidden="true">&rarr;</span></a>
-	</li>
-  </ul>
+    <ul class="pager">
+        <li class="previous" ng-show="commentPage > 0">
+            <a ng-click="commentPage = commentPage - 1; fetchComment();"><span aria-hidden="true">&larr;</span> Newer</a>
+        </li>
+        <li class="next" ng-show="commentList.length === commentLimit">
+            <a ng-click="commentPage = commentPage + 1; fetchComment();">Older <span aria-hidden="true">&rarr;</span></a>
+        </li>
+    </ul>
 </nav>
-

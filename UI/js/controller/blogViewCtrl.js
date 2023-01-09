@@ -1,7 +1,7 @@
 angular.module('mgBlog')
-    .controller('BlogViewCtrl', ['$scope', '$http', '$routeParams', '$location',
+    .controller('BlogViewCtrl', ['$scope', '$http', '$routeParams',
         'checkLoginProvider', 'setTitleProvider',
-        function($scope, $http, $routeParams, $location, checkLoginProvider, setTitleProvider) {
+        function($scope, $http, $routeParams, checkLoginProvider, setTitleProvider) {
 
             angular.extend($scope, {
 
@@ -50,11 +50,26 @@ angular.module('mgBlog')
                         $scope.alert = { message: response.data.message, status: response.data.status === 'success' ? 'success' : 'danger' };
 
                     });
+                },
+
+                deleteBlog: function(blog) {
+
+                    if (confirm("Are you sure want to delete ?")) {
+
+                        $http.post('/blog/delete', { id: blog.id })
+                            .then(function(response) {
+                                if (response.data.status === 'success') {
+                                    window.location = '#!/';
+                                }
+                            });
+                    }
+
                 }
             });
 
             checkLoginProvider.checkLogin().then(function(response) {
                 $scope.isLoggedIn = response.data.ok;
+                $scope.username = response.data.user;
                 $scope.fetchBlog();
             });
 
