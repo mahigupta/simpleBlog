@@ -22,6 +22,7 @@ create table blog (
 	userid int(32) not null,
 	title varchar(256) not null,
 	content longtext null,
+	slug varchar(256) GENERATED ALWAYS AS (REPLACE(title, ' ', '-')),
 	last_modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 	FOREIGN KEY (userid) references users(id)

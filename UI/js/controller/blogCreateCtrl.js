@@ -35,7 +35,7 @@ angular.module('mgBlog')
                 var path = $location.path();
 
                 if (path.indexOf('/blog/edit') !== -1) {
-                    $http.post('/blog/view', { id: $routeParams.id }).then(function(response) {
+                    $http.post('/blog/view', { id: $routeParams.id, slug: $routeParams.slug }).then(function(response) {
                         var data = response.data && response.data.data ? response.data.data[0] : {};
 
                         if (data.username != resp.data.user) {

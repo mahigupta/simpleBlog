@@ -86,7 +86,7 @@ angular.module('mgBlog', ['ngRoute'])
                     }]
                 }
             })
-            .when('/blog/edit/:id', {
+            .when('/blog/edit/:id/:slug', {
                 templateUrl: 'UI/template/blog_create.html',
                 controller: 'BlogCreateCtrl'
             })
@@ -99,7 +99,7 @@ angular.module('mgBlog', ['ngRoute'])
                     }]
                 }
             })
-            .when('/blog/view/:id', {
+            .when('/blog/view/:id/:slug', {
                 templateUrl: 'UI/template/blog_view.html',
                 controller: 'BlogViewCtrl'
             })

@@ -7,18 +7,18 @@
     <li class="list-group-item" ng-repeat="blog in blogList">
         <div ng-if="my">
             <div class="pull-right">
-                <a href="#!/blog/edit/{{blog.id}}" class="glyphicon glyphicon-pencil">&nbsp;</a>
+                <a href="#!/blog/edit/{{blog.id}}/{{blog.slug}}" class="glyphicon glyphicon-pencil">&nbsp;</a>
                 <a class="glyphicon glyphicon-remove" ng-click="deleteBlog(blog)"></a>
             </div>
             <div class="clearfix"></div>
         </div>
 
-        <h2><a href="#!/blog/view/{{blog.id}}">{{blog.title}}</a></h2>
+        <h2><a href="#!/blog/view/{{blog.id}}/{{blog.slug}}">{{blog.title}}</a></h2>
 
         <h6 class="text-muted pull-left"> Author: {{blog.username}}</h6>
         <h6 class="text-muted pull-right"> Last edited: {{blog.last_modified * 1000 | date: 'medium'}}</h6>
         <div class="clearfix"></div>
-        <p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}">More</a></p>
+        <p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}/{{blog.slug}}">More</a></p>
     </li>
 </ul>
 
