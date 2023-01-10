@@ -30,4 +30,16 @@ class comment_model extends base_model {
 		return $this->database->query($sql, array($blog_id, $user['id'], $comment));
 	}
 
+	public function get_comment_count($blog_id) {
+		$sql = "select count(*) as `count` from comments where blogid = ?";
+		$rows = $this->database->query($sql, array($blog_id));
+		$count = 0;
+
+		while($row = $rows->fetch_array(MYSQLI_ASSOC)) {
+			$count = (int)$row['count'];
+		}
+
+		return $count;
+	}
+
 }

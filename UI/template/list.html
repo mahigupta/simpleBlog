@@ -19,6 +19,8 @@
         <h6 class="text-muted pull-right"> Last edited: {{blog.last_modified * 1000 | date: 'medium'}}</h6>
         <div class="clearfix"></div>
         <p>{{blog.content}}...<a href="#!/blog/view/{{blog.id}}/{{blog.slug}}">More</a></p>
+        <p class="pull-right"><i class="glyphicon glyphicon-comment"></i> {{blog.comment_count}}</p>
+        <div class="clearfix"></div>
     </li>
 </ul>
 

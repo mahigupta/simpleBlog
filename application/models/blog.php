@@ -2,6 +2,12 @@
 
 class blog_model extends base_model
 {
+    function __construct(Database $database, Session $session) {
+		parent::__construct($database, $session);
+		
+		include_once APPLICATION_PATH.'/models/comment.php';
+		$this->comment_model = new comment_model($this->database, $this->session);
+	}
 
     public function fetchBlogList($page = 0, $limit = 10, $user = '')
     {
@@ -20,6 +26,7 @@ class blog_model extends base_model
 
         if ($rows && $rows->num_rows > 0) {
             while ($row = $rows->fetch_array(MYSQLI_ASSOC)) {
+                $row['comment_count'] = $this->comment_model->get_comment_count($row['id']);
                 $results[] = $row;
             }
         }
@@ -40,6 +47,7 @@ class blog_model extends base_model
 
         if ($rows && $rows->num_rows > 0) {
             while ($row = $rows->fetch_array(MYSQLI_ASSOC)) {
+                $row['comment_count'] = $this->comment_model->get_comment_count($row['id']);
                 $results[] = $row;
             }
         }

@@ -28,7 +28,7 @@
 </div>
 
 <div class="page-header">
-    <h3>Comments</h3>
+    <h3>Comments ({{blog.comment_count}})</h3>
 </div>
 
 <form ng-hide="!isLoggedIn" class="post-comment-form">
@@ -57,8 +57,8 @@
         <div class="clearfix"></div>
     </li>
 
-    <li class="list-group-item" ng-if="commentList.length === 0">
-        <p>No comments on this post !!!! <span ng-if="!isLoggedIn"><a href="#!/login">Login</a> to comments on this post.</span></p>
+    <li class="list-group-item" ng-if="commentList.length === 0 || !isLoggedIn">
+        <p><span ng-if="commentList.length === 0">No comments on this post !!!! </span><span ng-if="!isLoggedIn"><a href="#!/login">Login</a> to comments on this post.</span></p>
     </li>
 </ul>
 <nav aria-label="...">

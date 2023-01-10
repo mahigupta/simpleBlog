@@ -44,6 +44,7 @@ angular.module('mgBlog')
                         if (response.data.status === 'success') {
                             $scope.commentPage = 0;
                             $scope.fetchComment();
+                            $scope.blog.comment_count += 1;
                         }
 
                         $scope.currentComment = '';
